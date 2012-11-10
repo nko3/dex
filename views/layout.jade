@@ -1,7 +1,7 @@
 !!! 5
 head
   meta(charset='utf-8')
-  title= title
+  block title
   link(rel='stylesheet', href='/vendor/reset.css')
   link(rel='stylesheet', href='/main.css')
   script(src='/vendor/jquery.js')
@@ -9,4 +9,9 @@ head
   block head
 body
   .container
+    header
+      nav
+        - links = [{title:'Home', href:'/'}, {title:'Create a Scraper', href:'/new'}, {title:'Browse Scrapers', href:'/browse/1'}]
+        - each link in links
+          a(href=link.href, class=(link.title == title ? 'active' : ''))= link.title
     block content
