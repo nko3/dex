@@ -10,6 +10,15 @@ block content
       p
         label URL to test scraper with (required)
         input.big(name='url_example', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
+    .clearfix
+      .selectors-wrap
+        h2 CSS selectors to extract
+        h3 See <a href='http://api.jquery.com/category/selectors/' target="_blank">jQuery Documentation</a> for selector syntax help.
+        section.selectors.form-part
+      .preview-wrap
+        h2 Preview
+        h3 See and debug your CSS selector extraction results here.
+        section.preview.form-part
     section.form-submit
       p.left
         ="Done editing?"

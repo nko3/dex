@@ -4,6 +4,7 @@
 @grey: #aaa;
 @width: 920px;
 @font: 'Actor',tahoma,verdana,sans-serif;
+@form-part-padding-h:28px;
 
 html,body {
   width: 100%;
@@ -105,7 +106,7 @@ header {
   }
   #nko-button {
     position: absolute;
-    right: 8px;
+    right: 0;
     top: @height / 2 - 25/2 + 1px;
   }
 }
@@ -122,13 +123,37 @@ section.form-part {
   background: @lightblue;
   border: 2px solid darken(@lightblue, 3%);
   -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
-    border-radius: 12px;
-    padding: 20px 28px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+  padding: 20px @form-part-padding-h;
+  margin-bottom: 20px;
+}
+
+.selectors-wrap, .preview-wrap {
+  h2 {
+    font-size: 16px;
+    line-height:20px;
+    padding: 12px 8px 0;
+  }
+  h3 {
+    font-size: 12px;
+    line-height: 16px;
+    color: lighten(@black, 10%);
+    padding: 0 8px 8px;
+  }
+}
+
+.selectors-wrap {
+  float: left;
+  width: @width / 2 - @form-part-padding-h/2;
+}
+
+.preview-wrap {
+  float: right;
+  width: @width / 2 - @form-part-padding-h/2;
 }
 
 section.form-submit {
-  margin: 20px 0;
   /*background: @lightblue;
   border: 2px solid darken(@lightblue, 3%);*/
   padding: 0 20px;
