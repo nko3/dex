@@ -1,16 +1,23 @@
 {
   "name": "nko3-mahou-shoujo-billyh",
-  "version": "0.0.0",
+  "version": "0.0.0-1",
   "description": "MAHOU SHOUJO BILLYH",
-  "main": "server.js",
+  "main": "server.coffee",
   "scripts": {
-    "start": "node server.js"
+    "start": "coffee server.coffee"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:nko3/mahou-shoujo-billyh.git"
   },
   "dependencies": {
+    "express": "3.x",
+    "coffee-script": "1.4.x",
+    "jade": "0.27.x",
+    "less": "1.3.x",
+    "less-middleware": "0.1.x",
+    "connect-coffee-script": "0.0.4",
+    "connect": "2.6.x"
   },
   "engines": {
     "node": "0.8.x"
