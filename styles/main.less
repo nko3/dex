@@ -1,5 +1,6 @@
 @darkblue: #016ABC;
 @black: #333;
+@grey: #aaa;
 @width: 920px;
 @font: 'Actor',tahoma,verdana,sans-serif;
 
@@ -113,10 +114,21 @@ ol.scrapers {
 }
 
 nav.browse-nav {
-  color: #aaa;
+  color: @grey;
   padding: 12px 16px;
   .page-count {
     padding: 0 16px;
     color: #000;
   }
 }
+
+.homebox {
+  width: 250px;
+  height: 100px;
+  margin: 10px;
+  outline: 1px solid @grey;
+  display:inline-block;
+  padding: 20px;
+}
+
+.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
