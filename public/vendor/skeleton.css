@@ -1,0 +1,119 @@
+/* from: http://www.getskeleton.com/ , MIT */
+
+body {
+    -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+    -webkit-text-size-adjust: 100%;
+}
+
+/* #Clearing
+================================================== */
+
+    /* Self Clearing Goodness */
+    .container:after { content: "\0020"; display: block; height: 0; clear: both; visibility: hidden; }
+
+    /* Use clearfix class on parent to clear nested columns,
+    or wrap each row of columns in a <div class="row"> */
+    .clearfix:before,
+    .clearfix:after,
+    .row:before,
+    .row:after {
+      content: '\0020';
+      display: block;
+      overflow: hidden;
+      visibility: hidden;
+      width: 0;
+      height: 0; }
+    .row:after,
+    .clearfix:after {
+      clear: both; }
+    .row,
+    .clearfix {
+      zoom: 1; }
+
+    /* You can also use a <br class="clear" /> to clear columns */
+    .clear {
+      clear: both;
+      display: block;
+      overflow: hidden;
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
+
+    /* #Images
+================================================== */
+
+  img.scale-with-grid {
+    max-width: 100%;
+    height: auto; }
+
+
+/* #Buttons
+================================================== */
+
+
+  /* Fix for odd Mozilla border & padding issues */
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+
+/* #Forms
+================================================== */
+
+  form {
+    margin-bottom: 20px; }
+  fieldset {
+    margin-bottom: 20px; }
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea,
+  select {
+    border: 1px solid #ccc;
+    padding: 6px 4px;
+    outline: none;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    font: 13px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #777;
+    margin: 0;
+    width: 210px;
+    max-width: 100%;
+    display: block;
+    margin-bottom: 20px;
+    background: #fff; }
+  select {
+    padding: 0; }
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border: 1px solid #aaa;
+    color: #444;
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+    box-shadow:  0 0 3px rgba(0,0,0,.2); }
+  textarea {
+    min-height: 60px; }
+  label,
+  legend {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+color: #444;
+padding: 4px 0;  }
+  select {
+    width: 220px; }
+  input[type="checkbox"] {
+    display: inline; }
+  label span,
+  legend span {
+    font-weight: normal;
+    font-size: 13px;
+    color: #444; }
+
+

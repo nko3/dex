@@ -4,7 +4,9 @@ block title
 block content
   form(action='/create', method='post')
     p
-      input(name='title', type='text', placeholder='Title of scraper (required)')
+      label Title of scraper (required)
+      input.big(name='title', type='text', placeholder='Example: YouTube Channel Latest Videos')
     p
-      input(name='url_example', type='text', placeholder='Test URL (http://example.com/whatever)')
+      label URL to test scraper with (required)
+      input.big(name='url_example', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
     input(type='submit', value='Save')

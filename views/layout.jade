@@ -3,16 +3,19 @@ head
   meta(charset='utf-8')
   block title
   link(rel='stylesheet', href='/vendor/reset.css')
+  <link href='http://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
+  link(rel='stylesheet', href='/vendor/skeleton.css')
   link(rel='stylesheet', href='/main.css')
   script(src='/vendor/jquery.js')
   script(src='/main.js')
   block head
 body
-  .container
-    header
+  header
+    .container
       nav
         - links = [{title:'Home', href:'/'}, {title:'Create a Scraper', href:'/new'}, {title:'Browse Scrapers', href:'/browse/1'}]
         - each link in links
           a(href=link.href, class=(link.title == title ? 'active' : ''))= link.title
       <iframe id='nko-button' src="http://nodeknockout.com/iframe/mahou-shoujo-billyh" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
+  section.content.container
     block content
