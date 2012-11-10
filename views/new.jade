@@ -3,10 +3,15 @@ block title
   title Create a Scraper
 block content
   form(action='/create', method='post')
-    p
-      label Title of scraper (required)
-      input.big(name='title', type='text', placeholder='Example: YouTube Channel Latest Videos')
-    p
-      label URL to test scraper with (required)
-      input.big(name='url_example', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
-    input(type='submit', value='Save')
+    section.form-part
+      p
+        label Title of scraper (required)
+        input.big(name='title', type='text', placeholder='Example: YouTube Channel Latest Videos')
+      p
+        label URL to test scraper with (required)
+        input.big(name='url_example', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
+    section.form-submit
+      p.left
+        ="Done editing?"
+        input.black(type='submit', value='Save')
+      input.lightblue(type='button', value='Preview All')

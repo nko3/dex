@@ -1,4 +1,5 @@
 @darkblue: #016ABC;
+@lightblue: #F7F8Fb;
 @black: #333;
 @width: 920px;
 @font: 'Actor',tahoma,verdana,sans-serif;
@@ -17,6 +18,9 @@ label, legend {
   font-weight:normal;
 }
 
+.left {float: left}
+.right {float:right}
+
 .button, input[type="submit"],
   input[type="reset"],
   input[type="button"] {
@@ -26,19 +30,30 @@ label, legend {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    color: #fff;
-    background: @black;
     display: inline-block;
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
     margin-bottom: 20px;
     line-height: normal;
-    &:hover {
-      background: lighten(@black, 10%);
+    &.black {
+      color: #fff;
+      background: @black;
+      &:hover {
+        background: lighten(@black, 10%);
+      }
+      &:active {
+        background: lighten(@black, 30%);
+      }
     }
-    &:active {
-      background: lighten(@black, 30%);
+    &.lightblue {
+      background: darken(@lightblue, 12%);
+      &:hover {
+        background: darken(@lightblue, 18%);
+      }
+      &:active {
+        background: darken(@lightblue, 28%);
+      }
     }
   }
 
@@ -100,6 +115,29 @@ section.content {
 
 .home {
   text-align: center;
+}
+
+section.form-part {
+  background: @lightblue;
+  border: 2px solid darken(@lightblue, 3%);
+  -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    padding: 20px 28px;
+}
+
+section.form-submit {
+  margin: 20px 0;
+  /*background: @lightblue;
+  border: 2px solid darken(@lightblue, 3%);*/
+  padding: 0 20px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    text-align:right;
+  input {
+    margin: 0 6px;
+  }
 }
 
 ol.scrapers {
