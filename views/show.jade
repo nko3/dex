@@ -1,0 +1,7 @@
+extends layout
+block title
+  title Scraper id: #{scraper.id}
+block content
+  h1= scraper.title
+  h2= scraper.url_example
+  a(href="/#{scraper.id}/scrape?url=#{scraper.url_example}") Try it out &rarr;

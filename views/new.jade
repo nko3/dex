@@ -1,0 +1,10 @@
+extends layout
+block title
+  title Create a Scraper
+block content
+  form(action='/create', method='post')
+    p
+      input(name='title', type='text', placeholder='Title of scraper (required)')
+    p
+      input(name='url_example', type='text', placeholder='Test URL (http://example.com/whatever)')
+    input(type='submit', value='Save')
