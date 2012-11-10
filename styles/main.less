@@ -11,17 +11,29 @@ a {
 }
 
 header {
+  position: relative;
   background: darken(@background, 5%);
+  @height: 40px;
   nav {
     a {
       display: inline-block;
-      padding: 8px 16px 10px;
+      line-height: @height;
+      padding: 0 16px 2px;
       &.active {
         background: #18b;
         color: #fff;
       }
     }
   }
+  #nko-button {
+    position: absolute;
+    right: 32px;
+    top: @height / 2 - 25/2;
+  }
+}
+
+.home {
+  text-align: center;
 }
 
 ol.scrapers {
