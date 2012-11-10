@@ -1,5 +1,6 @@
 express = require 'express'
 config = require './config'
+models = require './models'
 app = express()
 config.expressApp(app)
 
