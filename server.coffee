@@ -19,20 +19,6 @@ app.post '/create', (req, res) ->
       scraper.save()
       res.redirect "/#{scraper.id}"
 
-app.get '/:id', (req, res) =>
-  models.Scraper.findById req.params.id, (e, scraper) ->
-    if e
-      res.send(400, "scraper does not exist")
-    else
-      res.render 'show', {scraper: scraper, title: 'show'}
-
-app.get '/:id/scrape', (req, res) =>
-  models.Scraper.findById req.params.id, (e, scraper) ->
-    if e
-      res.send(400, "scraper does not exist")
-    else
-      res.json({url: req.query.url, somemorejson: 'TODO'})
-
 app.get '/browse/:page', (req, res) ->
   models.Scraper.count (e, count) =>
     page = parseInt(req.params.page)
@@ -43,6 +29,20 @@ app.get '/browse/:page', (req, res) ->
 
     models.Scraper.find {}, '', {sort: {created_at: -1}, limit: perPage, skip: perPage * (page - 1)}, (e, scrapers) ->
       res.render 'browse', {title: 'Browse Scrapers', scrapers: scrapers, nextPage: nextPage, prevPage: prevPage, page: page, totalPages: totalPages}
+
+app.get '/:id/scrape', (req, res) =>
+  models.Scraper.findById req.params.id, (e, scraper) ->
+    if e
+      res.send(400, "scraper does not exist")
+    else
+      res.json({url: req.query.url, somemorejson: 'TODO'})
+
+app.get '/:id', (req, res) =>
+  models.Scraper.findById req.params.id, (e, scraper) ->
+    if e
+      res.send(400, "scraper does not exist")
+    else
+      res.render 'show', {scraper: scraper, title: 'show'}
 
 app.listen(config.constants.port)
 console.log "server started on localhost:#{config.constants.port}"
