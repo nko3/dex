@@ -18,7 +18,10 @@ class Jenkins
             results = []
             for selector in selectors
               result = {key: selector}
-              result['values'] = $(selector).text()
+              values = []
+              $(selector).each ->
+                values.push($.trim($(@).text()))
+              result['values'] = values
               results.push(result)
             cb(@successJSON(url, results))
     catch e
