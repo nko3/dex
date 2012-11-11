@@ -39,7 +39,7 @@ class Jenkins
     json
 
   successJSON: (url, results) =>
-    json = {url: url, error: false}
+    json = {url: url}
     for result in results
       json[result['key']] = result['values']
     json
