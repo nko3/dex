@@ -1,12 +1,11 @@
 mongoose = require('mongoose')
-validator = require('mongoose-validator').validator
 
 Selector = new mongoose.Schema
   value: String # jquery selector string
 
 Scraper = new mongoose.Schema
-  title: {type: String, validate: [validator.len(1, 140)]}
-  url_example: {type: String, validate: [validator.isUrl()]}
+  title: String
+  url_example: String
   #url_regex: String # TODO
   selectors: [Selector]
   created_at: {type: Date, default: Date.now}
