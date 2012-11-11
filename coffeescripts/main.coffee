@@ -75,7 +75,7 @@ togglePreviewWrapText = (e) =>
     $('.preview pre').css('white-space', 'pre-wrap')
   else
     $('.preview').css('word-wrap', 'normal')
-    $('.preview pre').css('white-space', 'nowrap')
+    $('.preview pre').css('white-space', 'pre')
 
 updatePreview = (error, data) =>
   if error
