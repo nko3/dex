@@ -25,7 +25,7 @@ app.post '/create', (req, res) ->
       res.send(400, "Error. Please make sure to fill out all required fields: #{e}") # TODO better error handling
     else
       scraper.save()
-      res.redirect "/#{scraper.id}"
+      res.json({path: "/#{scraper.id}"})
 
 app.get '/browse/:page', (req, res) ->
   models.Scraper.count (e, count) =>

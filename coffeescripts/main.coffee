@@ -6,6 +6,13 @@ selectorValue = ($input) =>
   value = $.trim($input.val())
   if value == "" then null else value
 
+selectors = =>
+  allSelectors = _.map $("input[name='selectors[]']"), (input) =>
+    selectorValue($(input))
+  notNilSelectors = _.filter allSelectors, (selectorValue) =>
+    selectorValue?
+  notNilSelectors
+
 previewSelector = (e) =>
   e.preventDefault()
   selector = selectorValue($(e.currentTarget).parent().find("input[name='selectors[]']"))
@@ -15,13 +22,10 @@ previewSelector = (e) =>
 
 previewAll = (e) =>
   e.preventDefault()
-  allSelectors = _.map $("input[name='selectors[]']"), (input) =>
-    selectorValue($(input))
-  selectors = _.filter allSelectors, (selectorValue) =>
-    selectorValue?
-  makePreviewPost(selectors)
+  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
+  makePreviewPost(selectors())
 
-makePreviewPost = (selectors) =>
+makePreviewPost = (allSelectors) =>
   return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
 
   $.ajax
@@ -30,7 +34,7 @@ makePreviewPost = (selectors) =>
     dataType: 'json'
     data:
       url: urlValue()
-      selectors: selectors
+      selectors: allSelectors
     success: (data) =>
       updatePreview(false, data)
     error: (jqXHR, textStatus, error) =>
@@ -61,9 +65,30 @@ updatePreview = (error, data) =>
   $('.preview pre').text(json)
   hljs.highlightBlock($(".preview pre")[0])
 
+saveScraper = (e) =>
+  e.preventDefault()
+
+  return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
+  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
+
+  $.ajax
+    type: 'POST'
+    url: '/create'
+    data:
+      title: $("input[name='title']").val()
+      url_example: urlValue()
+      selectors: selectors()
+    dataType: 'json'
+    success: (json) =>
+      window.location.href = json['path']
+    error: (jqXHR, textStatus, error) =>
+      alert("Error creating scraper. Make sure you've entered a title and that the URL is valid.")
+      console.log jqXHR, textStatus, error
+
 $ =>
   $('.add-selector').click(addSelector)
   $('.preview-selector').click(previewSelector)
   $('.preview-all').click(previewAll)
   $('.preview-wrap-text input').change(togglePreviewWrapText)
+  $('.save-scraper').click(saveScraper)
 

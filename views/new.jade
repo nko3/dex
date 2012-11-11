@@ -2,34 +2,33 @@ extends layout
 block title
   title Create a Scraper
 block content
-  form(action='/create', method='post')
-    section.form-part
-      p
-        label Title of scraper (required)
-        input.big(name='title', type='text', placeholder='Example: YouTube Channel Latest Videos')
-      p
-        label URL to test scraper with (required)
-        input.big(name='url_example', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
-    .clearfix
-      .selectors-wrap
-        h2 CSS selectors to extract
-        h3 See <a href='http://api.jquery.com/category/selectors/' target="_blank">jQuery Documentation</a> for help on CSS selector syntax.
-        section.selectors.form-part
-          input(type='text', name='selectors[]', placeholder='Enter a CSS selector')
-          input.preview-selector.lightblue(type='button', value='Preview')
-          ol.additional-selectors
-          a.add-selector(href='#') + Add another selector
-      .preview-wrap
-        h2 Preview
-        h3
-          ="See and debug your CSS selector extraction results."
-          .preview-wrap-text
-            input(type="checkbox", checked="checked")
-            = "Wrap text?"
-        section.preview.form-part
-          pre Once you define at least one CSS selector to extract, press the "Preview" or "Preview All" button to see your results here.
-    section.form-submit
-      ="Done editing? "
-      input.black(type='submit', value='Save')
-      =" or "
-      input.preview-all.lightblue(type='button', value='Preview All')
+  section.form-part
+    p
+      label Title of scraper (required)
+      input.big(name='title', type='text', placeholder='Example: YouTube Channel Latest Videos')
+    p
+      label URL to test scraper with (required)
+      input.big(name='url_example', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
+  .clearfix
+    .selectors-wrap
+      h2 CSS selectors to extract
+      h3 See <a href='http://api.jquery.com/category/selectors/' target="_blank">jQuery Documentation</a> for help on CSS selector syntax.
+      section.selectors.form-part
+        input(type='text', name='selectors[]', placeholder='Enter a CSS selector')
+        input.preview-selector.lightblue(type='button', value='Preview')
+        ol.additional-selectors
+        a.add-selector(href='#') + Add another selector
+    .preview-wrap
+      h2 Preview
+      h3
+        ="See and debug your CSS selector extraction results."
+        .preview-wrap-text
+          input(type="checkbox", checked="checked")
+          = "Wrap text?"
+      section.preview.form-part
+        pre Once you define at least one CSS selector to extract, press the "Preview" or "Preview All" button to see your results here.
+  section.form-submit
+    ="Done editing? "
+    input.save-scraper.black(type='submit', value='Save')
+    =" or "
+    input.preview-all.lightblue(type='button', value='Preview All')
