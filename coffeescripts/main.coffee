@@ -59,6 +59,7 @@ updatePreview = (error, data) =>
   else
     json = JSON.stringify(data, null, '  ')
   $('.preview pre').text(json)
+  hljs.highlightBlock($(".preview pre")[0])
 
 $ =>
   $('.add-selector').click(addSelector)
