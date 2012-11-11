@@ -2,7 +2,7 @@
 @lightblue: #F7F8Fb;
 @black: #333;
 @grey: #aaa;
-@width: 920px;
+@width: 940px;
 @font: 'Actor',tahoma,verdana,sans-serif;
 @form-part-padding-h:28px;
 
@@ -65,7 +65,7 @@ input[type="text"],
   textarea,
   select {
   font-size: 16px;
-  padding: 10px 6px;
+  padding: 8px 6px;
   font: @font;
 }
 
@@ -146,6 +146,13 @@ section.form-part {
 .selectors-wrap {
   float: left;
   width: @width / 2 - @form-part-padding-h/2;
+  input {
+    display: inline;
+  }
+  .remove-selector {
+    padding-left: 8px;
+    font-size: 14px;
+  }
 }
 
 .preview-wrap {
@@ -156,11 +163,11 @@ section.form-part {
 section.form-submit {
   /*background: @lightblue;
   border: 2px solid darken(@lightblue, 3%);*/
-  padding: 0 20px;
+  padding: 12px 20px;
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
     border-radius: 12px;
-    text-align:right;
+    text-align:center;
   input {
     margin: 0 6px;
   }

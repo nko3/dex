@@ -13,14 +13,18 @@ block content
     .clearfix
       .selectors-wrap
         h2 CSS selectors to extract
-        h3 See <a href='http://api.jquery.com/category/selectors/' target="_blank">jQuery Documentation</a> for selector syntax help.
+        h3 See <a href='http://api.jquery.com/category/selectors/' target="_blank">jQuery Documentation</a> for help on CSS selector syntax.
         section.selectors.form-part
+          input(type='text', name='selectors[]', placeholder='Enter a CSS selector')
+          input.lightblue(type='button', value='Preview')
+          ol.additional-selectors
+          a.add-selector(href='#') + Add another selector
       .preview-wrap
         h2 Preview
         h3 See and debug your CSS selector extraction results here.
         section.preview.form-part
     section.form-submit
-      p.left
-        ="Done editing?"
-        input.black(type='submit', value='Save')
-      input.lightblue(type='button', value='Preview All')
+      ="Done editing? "
+      input.black(type='submit', value='Save')
+      =" or "
+      input.preview-al.lightblue(type='button', value='Preview All')
