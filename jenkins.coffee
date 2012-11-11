@@ -17,7 +17,7 @@ class Jenkins
             $ = window.$
             results = []
             for selector in selectors
-              result = {key: selector['v']}
+              result = {key: selector['c'] || selector['v']}
               values = []
               $(selector['v']).each ->
                 value = {}

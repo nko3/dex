@@ -26,6 +26,11 @@ selectors = =>
     unless $input.siblings().find("input[name='innerText']").is(':checked')
       value['t'] = 'f'
 
+    custom_key = $.trim($input.siblings().find("input[name='custom-key']").val())
+    console.log "CUSTOM",$.trim($input.siblings().find("input[name='custom-key']").val())
+    if custom_key != ""
+      value['c'] = custom_key
+
     $input.siblings().find("input[name='attributes']").siblings().find(".tag span").each ->
       value['a'] ?= []
       value['a'].push($.trim($(@).text()))
@@ -64,7 +69,7 @@ removeSelector = (e) =>
 
 addSelector = (e) =>
   e.preventDefault()
-  $html = $("<li class='selector'><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><a href='#' class='remove-selector'>Remove</a><p><input name='innerText' type='checkbox' checked='checked'> Extract innerText<p><input name='attributes'></li>")
+  $html = $("<li class='selector'><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><a href='#' class='remove-selector'>Remove</a><p><input name='innerText' type='checkbox' checked='checked'> Extract innerText<p><input name='attributes'><p><input name='custom-key' type='text' placeholder='Custom JSON key'></li>")
   $html.appendTo('.additional-selectors')
   $html.find('.remove-selector').click(removeSelector)
   $html.find("input[name='attributes']").tagsInput(tagsInputOptions)

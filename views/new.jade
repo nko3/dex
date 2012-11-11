@@ -20,6 +20,10 @@ block content
             label List of element attributes to extract (optional)
             input(name="attributes")
             span Type an attribute (e.g. "href") and press enter.
+          p.custom-key-wrap
+            label Customize the hash key for the JSON output (optional)
+            input(type='text', name='custom-key', placeholder='Custom JSON key')
+
         ol.additional-selectors
         .controls.clearfix
           a.add-selector(href='#') + Add another selector
