@@ -140,6 +140,7 @@ section.form-part {
     line-height: 16px;
     color: lighten(@black, 10%);
     padding: 0 8px 8px;
+    position: relative;
   }
 }
 
@@ -158,6 +159,20 @@ section.form-part {
 .preview-wrap {
   float: right;
   width: @width / 2 - @form-part-padding-h/2;
+  h3 {
+    .preview-wrap-text {
+      position: absolute;
+      right:0;
+      top:-2px;
+    }
+  }
+}
+
+.preview {
+  font-family: monospace;
+  font-size: 12px;
+  overflow:scroll;
+  word-wrap:  break-word;
 }
 
 section.form-submit {
