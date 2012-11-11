@@ -11,7 +11,7 @@ scrapeError = (res, url, message) =>
   res.json(400, json)
 
 app.get '/', (req, res) ->
-  res.render 'index', {title: 'Home'}
+  res.render 'index', {title: 'About Dex'}
 
 app.get '/new', (req, res) ->
   res.render 'new', {title: 'Create a Scraper'}
