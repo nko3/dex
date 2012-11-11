@@ -6,7 +6,7 @@ request = require('request')
 class Jenkins
   extract: (url, selectors, cb) =>
     try
-      request url, (e, res, body) =>
+      request {url: url, method: 'GET', headers: {'User-Agent': 'Mozilla/5.0 (compatible; MahouBilly/0.1; +http://nodeknockout.com/teams/mahou-shoujo-billyh)'}}, (e, res, body) =>
         return cb(@errorJSON(url, e, "Error requesting URL."))  if e
         return cb(@errorJSON(url, res.statusCode, "Unsupported HTTP status code."))  unless res.statusCode == 200
         jsdom.env
