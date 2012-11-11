@@ -17,10 +17,16 @@ class Jenkins
             $ = window.$
             results = []
             for selector in selectors
-              result = {key: selector}
+              result = {key: selector['v']}
               values = []
-              $(selector).each ->
-                values.push($.trim($(@).text()))
+              $(selector['v']).each ->
+                value = {}
+                if selector['t'] != 'f'
+                  value['innerText'] = $.trim($(@).text())
+                if selector['a'] && selector['a'].length > 0
+                  for attribute in selector['a']
+                    value[attribute] = $.trim($(@).attr(attribute))
+                values.push(value)
               result['values'] = values
               results.push(result)
             cb(@successJSON(url, results))
@@ -28,7 +34,7 @@ class Jenkins
       return cb(@errorJSON(url, e, "Error requesting URL."))
 
   errorJSON: (url, e, message) =>
-    json = {url: url, error: {message: message}}
+    json = {url: url || null, error: {message: message}}
     json['error']['details'] = e  if e?
     json
 
