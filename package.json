@@ -1,6 +1,6 @@
 {
   "name": "nko3-mahou-shoujo-billyh",
-  "version": "0.0.0-5",
+  "version": "0.0.0-6",
   "description": "MAHOU SHOUJO BILLYH",
   "main": "server.coffee",
   "scripts": {
