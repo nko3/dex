@@ -19,7 +19,9 @@
     "connect-coffee-script": "0.0.4",
     "connect": "2.6.x",
     "mongoose": "3.x",
-    "mongoose-validator": "0.1.x"
+    "mongoose-validator": "0.1.x",
+    "request": "2.x",
+    "jsdom": "0.2.x"
   },
   "engines": {
     "node": "0.8.x"
