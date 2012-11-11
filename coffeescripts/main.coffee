@@ -1,3 +1,8 @@
+tagsInputOptions =
+  defaultText: 'add attributes'
+  height: '45px'
+  width: '320px'
+
 urlValue = =>
   value = $.trim($("input[name='url']").val())
   if value == "" then null else value
@@ -44,9 +49,10 @@ removeSelector = (e) =>
 
 addSelector = (e) =>
   e.preventDefault()
-  $html = $("<li class='selector'><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><a href='#' class='remove-selector'>Remove</a><p><input name='innerText' type='checkbox' checked='checked'> Extract innerText</li>")
+  $html = $("<li class='selector'><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><a href='#' class='remove-selector'>Remove</a><p><input name='innerText' type='checkbox' checked='checked'> Extract innerText<p><input name='attributes'></li>")
   $html.appendTo('.additional-selectors')
-  $html.children('.remove-selector').click(removeSelector)
+  $html.find('.remove-selector').click(removeSelector)
+  $html.find("input[name='attributes']").tagsInput(tagsInputOptions)
 
 togglePreviewWrapText = (e) =>
   if $('.preview-wrap-text input').is(':checked')
@@ -66,4 +72,5 @@ $ =>
   $('.add-selector').click(addSelector)
   $('.preview-all').click(previewAll)
   $('.preview-wrap-text input').change(togglePreviewWrapText)
+  $("input[name='attributes']").tagsInput(tagsInputOptions)
 
