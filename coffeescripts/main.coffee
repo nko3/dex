@@ -62,8 +62,10 @@ addSelector = (e) =>
 togglePreviewWrapText = (e) =>
   if $('.preview-wrap-text input').is(':checked')
     $('.preview').css('word-wrap', 'break-word')
+    $('.preview pre').css('white-space', 'pre-wrap')
   else
     $('.preview').css('word-wrap', 'normal')
+    $('.preview pre').css('white-space', 'nowrap')
 
 updatePreview = (error, data) =>
   if error
