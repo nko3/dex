@@ -82,8 +82,7 @@ saveScraper = (e) =>
     success: (json) =>
       window.location.href = json['path']
     error: (jqXHR, textStatus, error) =>
-      alert("Error creating scraper. Make sure you've entered a title and that the URL is valid.")
-      console.log jqXHR, textStatus, error
+      alert("Error: #{JSON.parse(jqXHR.responseText)['message']}")
 
 $ =>
   $('.add-selector').click(addSelector)

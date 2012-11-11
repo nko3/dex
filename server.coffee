@@ -1,4 +1,6 @@
 express = require 'express'
+_ = require 'underscore'
+_.str = require('underscore.string')
 config = require './config'
 models = require './models'
 j = require './jenkins'
@@ -19,13 +21,18 @@ app.get '/new', (req, res) ->
   res.render 'new', {title: 'Create a Scraper'}
 
 app.post '/create', (req, res) ->
-  scraper = new models.Scraper({title: req.body.title, url_example: req.body.url_example})
-  scraper.validate (e) ->
-    if e
-      res.send(400, "Error. Please make sure to fill out all required fields: #{e}") # TODO better error handling
-    else
-      scraper.save()
-      res.json({path: "/#{scraper.id}"})
+  title = _.str.trim(req.body.title)
+  url = _.str.trim(req.body.url_example)
+  if req.body.selectors.length == 0
+    res.json(400, {message: "Please enter at least one CSS selector."})
+  else if title.length == 0 || title.length > 140
+    res.json(400, {message: "Scraper title length must be between 1 and 140 characters."})
+  else if url.length == 0 || url.length > 1000
+    res.json(400, {message: "Scraper URL example length must be between 1 and 1000 characters."})
+  else
+    scraper = new models.Scraper({title: req.body.title, url_example: req.body.url_example, selectors: req.body.selectors})
+    scraper.save()
+    res.json({path: "/#{scraper.id}"})
 
 app.get '/browse/:page', (req, res) ->
   models.Scraper.count (e, count) =>
