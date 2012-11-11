@@ -2,22 +2,24 @@ extends layout
 block title
   title Create a Scraper
 block content
-  section.form-part
-    p
-      label Title of scraper (required)
-      input.big(name='title', type='text', placeholder='Example: YouTube Channel Latest Videos')
+  section.form-part.url-example
     p
       label URL to test scraper with (required)
-      input.big(name='url_example', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
+      input.big(name='url', type='text', placeholder='Example: http://www.youtube.com/user/CoolChannel/videos?sort=dd')
   .clearfix
     .selectors-wrap
       h2 CSS selectors to extract
       h3 See <a href='http://api.jquery.com/category/selectors/' target="_blank">jQuery Documentation</a> for help on CSS selector syntax.
       section.selectors.form-part
-        input(type='text', name='selectors[]', placeholder='Enter a CSS selector')
-        input.preview-selector.lightblue(type='button', value='Preview')
+        .selector
+          input(type='text', name='selectors[]', placeholder='Enter a CSS selector')
+          p
+            input(name='innerText', type='checkbox', checked='checked')
+            = "Extract innerText"
         ol.additional-selectors
-        a.add-selector(href='#') + Add another selector
+        .controls.clearfix
+          a.add-selector(href='#') + Add another selector
+          input.right.preview-all.black(type='button', value='Preview')
     .preview-wrap
       h2 Preview
       h3
@@ -29,6 +31,4 @@ block content
         pre Once you define at least one CSS selector to extract, press the "Preview" or "Preview All" button to see your results here.
   section.form-submit
     ="Done editing? "
-    input.save-scraper.black(type='submit', value='Save')
-    =" or "
-    input.preview-all.lightblue(type='button', value='Preview All')
+    input.black(type='button', value='Start Using Scraper')

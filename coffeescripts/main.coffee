@@ -1,5 +1,5 @@
 urlValue = =>
-  value = $.trim($("input[name='url_example']").val())
+  value = $.trim($("input[name='url']").val())
   if value == "" then null else value
 
 selectorValue = ($input) =>
@@ -8,33 +8,31 @@ selectorValue = ($input) =>
 
 selectors = =>
   allSelectors = _.map $("input[name='selectors[]']"), (input) =>
-    selectorValue($(input))
+    $input = $(input)
+    value = {v: selectorValue($input)}
+    unless $input.siblings().find("input[name='innerText']").is(':checked')
+      value['t'] = 'f'
+    value
+
   notNilSelectors = _.filter allSelectors, (selectorValue) =>
-    selectorValue?
+    selectorValue['v']?
   notNilSelectors
-
-previewSelector = (e) =>
-  e.preventDefault()
-  selector = selectorValue($(e.currentTarget).parent().find("input[name='selectors[]']"))
-
-  return alert("Please enter a CSS selector")  unless selector?
-  makePreviewPost([selector])
 
 previewAll = (e) =>
   e.preventDefault()
-  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
-  makePreviewPost(selectors())
 
-makePreviewPost = (allSelectors) =>
+  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
   return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
 
+  #decodeURIComponent($.param({url: "http://www.google.com", s: [{v: 'head title'}, {v: 'html meta', t: 'f', a: ['content', 'name']}]}))
+  params =
+    url: urlValue()
+    s: selectors()
+
   $.ajax
-    type: 'POST'
-    url: '/preview'
+    type: 'GET'
+    url: "/scrape?#{decodeURIComponent($.param(params))}"
     dataType: 'json'
-    data:
-      url: urlValue()
-      selectors: allSelectors
     success: (data) =>
       updatePreview(false, data)
     error: (jqXHR, textStatus, error) =>
@@ -46,10 +44,9 @@ removeSelector = (e) =>
 
 addSelector = (e) =>
   e.preventDefault()
-  $html = $("<li><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><input class='lightblue preview-selector' type='button' value='Preview'><a href='#' class='remove-selector'>Remove</a></li>")
+  $html = $("<li class='selector'><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><a href='#' class='remove-selector'>Remove</a><p><input name='innerText' type='checkbox' checked='checked'> Extract innerText</li>")
   $html.appendTo('.additional-selectors')
   $html.children('.remove-selector').click(removeSelector)
-  $html.children('.preview-selector').click(previewSelector)
 
 togglePreviewWrapText = (e) =>
   if $('.preview-wrap-text input').is(':checked')
@@ -65,29 +62,8 @@ updatePreview = (error, data) =>
   $('.preview pre').text(json)
   hljs.highlightBlock($(".preview pre")[0])
 
-saveScraper = (e) =>
-  e.preventDefault()
-
-  return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
-  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
-
-  $.ajax
-    type: 'POST'
-    url: '/create'
-    data:
-      title: $("input[name='title']").val()
-      url_example: urlValue()
-      selectors: selectors()
-    dataType: 'json'
-    success: (json) =>
-      window.location.href = json['path']
-    error: (jqXHR, textStatus, error) =>
-      alert("Error: #{JSON.parse(jqXHR.responseText)['message']}")
-
 $ =>
   $('.add-selector').click(addSelector)
-  $('.preview-selector').click(previewSelector)
   $('.preview-all').click(previewAll)
   $('.preview-wrap-text input').change(togglePreviewWrapText)
-  $('.save-scraper').click(saveScraper)
 
