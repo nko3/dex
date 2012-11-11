@@ -16,7 +16,7 @@ block content
         h3 See <a href='http://api.jquery.com/category/selectors/' target="_blank">jQuery Documentation</a> for help on CSS selector syntax.
         section.selectors.form-part
           input(type='text', name='selectors[]', placeholder='Enter a CSS selector')
-          input.lightblue(type='button', value='Preview')
+          input.preview-selector.lightblue(type='button', value='Preview')
           ol.additional-selectors
           a.add-selector(href='#') + Add another selector
       .preview-wrap
@@ -32,4 +32,4 @@ block content
       ="Done editing? "
       input.black(type='submit', value='Save')
       =" or "
-      input.preview-al.lightblue(type='button', value='Preview All')
+      input.preview-all.lightblue(type='button', value='Preview All')

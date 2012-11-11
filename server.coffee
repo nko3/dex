@@ -30,6 +30,10 @@ app.get '/browse/:page', (req, res) ->
     models.Scraper.find {}, '', {sort: {created_at: -1}, limit: perPage, skip: perPage * (page - 1)}, (e, scrapers) ->
       res.render 'browse', {title: 'Browse Scrapers', scrapers: scrapers, nextPage: nextPage, prevPage: prevPage, page: page, totalPages: totalPages}
 
+app.post '/preview', (req, res) ->
+  # TODO use req.body.selectors
+  res.json({url: req.body.url})
+
 app.get '/:id/scrape', (req, res) =>
   models.Scraper.findById req.params.id, (e, scraper) ->
     if e
