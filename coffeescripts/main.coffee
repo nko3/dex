@@ -1,5 +1,17 @@
+tagsInputOptions =
+  defaultText: 'add attributes'
+  height: '45px'
+  width: '320px'
+
+scrapePath = =>
+  params =
+    url: urlValue()
+    s: selectors()
+
+  "/scrape?#{decodeURIComponent($.param(params))}"
+
 urlValue = =>
-  value = $.trim($("input[name='url_example']").val())
+  value = $.trim($("input[name='url']").val())
   if value == "" then null else value
 
 selectorValue = ($input) =>
@@ -7,38 +19,44 @@ selectorValue = ($input) =>
   if value == "" then null else value
 
 selectors = =>
-  allSelectors = _.map $("input[name='selectors[]']"), (input) =>
-    selectorValue($(input))
+  allSelectors = []
+  $("input[name='selectors[]']").each ->
+    $input = $(@)
+    value = {v: selectorValue($input)}
+    unless $input.siblings().find("input[name='innerText']").is(':checked')
+      value['t'] = 'f'
+
+    $input.siblings().find("input[name='attributes']").siblings().find(".tag span").each ->
+      value['a'] ?= []
+      value['a'].push($.trim($(@).text()))
+    allSelectors.push(value)
+
   notNilSelectors = _.filter allSelectors, (selectorValue) =>
-    selectorValue?
+    selectorValue['v']?
   notNilSelectors
-
-previewSelector = (e) =>
-  e.preventDefault()
-  selector = selectorValue($(e.currentTarget).parent().find("input[name='selectors[]']"))
-
-  return alert("Please enter a CSS selector")  unless selector?
-  makePreviewPost([selector])
 
 previewAll = (e) =>
   e.preventDefault()
-  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
-  makePreviewPost(selectors())
 
-makePreviewPost = (allSelectors) =>
+  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
   return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
 
   $.ajax
-    type: 'POST'
-    url: '/preview'
+    type: 'GET'
+    url: scrapePath()
     dataType: 'json'
-    data:
-      url: urlValue()
-      selectors: allSelectors
     success: (data) =>
       updatePreview(false, data)
     error: (jqXHR, textStatus, error) =>
       updatePreview(true, [jqXHR, textStatus, error])
+
+done = (e) =>
+  e.preventDefault()
+
+  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
+  return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
+
+  window.location.href = scrapePath()
 
 removeSelector = (e) =>
   e.preventDefault()
@@ -46,16 +64,18 @@ removeSelector = (e) =>
 
 addSelector = (e) =>
   e.preventDefault()
-  $html = $("<li><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><input class='lightblue preview-selector' type='button' value='Preview'><a href='#' class='remove-selector'>Remove</a></li>")
+  $html = $("<li class='selector'><input type='text' name='selectors[]' placeholder='Enter a CSS selector'><a href='#' class='remove-selector'>Remove</a><p><input name='innerText' type='checkbox' checked='checked'> Extract innerText<p><input name='attributes'></li>")
   $html.appendTo('.additional-selectors')
-  $html.children('.remove-selector').click(removeSelector)
-  $html.children('.preview-selector').click(previewSelector)
+  $html.find('.remove-selector').click(removeSelector)
+  $html.find("input[name='attributes']").tagsInput(tagsInputOptions)
 
 togglePreviewWrapText = (e) =>
   if $('.preview-wrap-text input').is(':checked')
     $('.preview').css('word-wrap', 'break-word')
+    $('.preview pre').css('white-space', 'pre-wrap')
   else
     $('.preview').css('word-wrap', 'normal')
+    $('.preview pre').css('white-space', 'nowrap')
 
 updatePreview = (error, data) =>
   if error
@@ -65,29 +85,10 @@ updatePreview = (error, data) =>
   $('.preview pre').text(json)
   hljs.highlightBlock($(".preview pre")[0])
 
-saveScraper = (e) =>
-  e.preventDefault()
-
-  return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
-  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
-
-  $.ajax
-    type: 'POST'
-    url: '/create'
-    data:
-      title: $("input[name='title']").val()
-      url_example: urlValue()
-      selectors: selectors()
-    dataType: 'json'
-    success: (json) =>
-      window.location.href = json['path']
-    error: (jqXHR, textStatus, error) =>
-      alert("Error: #{JSON.parse(jqXHR.responseText)['message']}")
-
 $ =>
   $('.add-selector').click(addSelector)
-  $('.preview-selector').click(previewSelector)
   $('.preview-all').click(previewAll)
   $('.preview-wrap-text input').change(togglePreviewWrapText)
-  $('.save-scraper').click(saveScraper)
+  $("input[name='attributes']").tagsInput(tagsInputOptions)
+  $('.done').click(done)
 
