@@ -16,9 +16,8 @@ app.get '/', (req, res) ->
 app.get '/new', (req, res) ->
   res.render 'new', {title: 'Create a Scraper'}
 
-app.get '/scrape', (req, res) =>
+app.get '/scrape.json', (req, res) =>
   url = _.str.trim(req.query.url)
-  console.log 0,0,0,req.query
 
   # Input validation
   unless url? && url != ""
