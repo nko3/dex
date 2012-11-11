@@ -12,12 +12,17 @@ selectorValue = ($input) =>
   if value == "" then null else value
 
 selectors = =>
-  allSelectors = _.map $("input[name='selectors[]']"), (input) =>
-    $input = $(input)
+  allSelectors = []
+  $("input[name='selectors[]']").each ->
+    $input = $(@)
     value = {v: selectorValue($input)}
     unless $input.siblings().find("input[name='innerText']").is(':checked')
       value['t'] = 'f'
-    value
+
+    $input.siblings().find("input[name='attributes']").siblings().find(".tag span").each ->
+      value['a'] ?= []
+      value['a'].push($.trim($(@).text()))
+    allSelectors.push(value)
 
   notNilSelectors = _.filter allSelectors, (selectorValue) =>
     selectorValue['v']?
