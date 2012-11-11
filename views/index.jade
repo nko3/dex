@@ -1,25 +1,19 @@
 extends layout
 block title
-  title Home
+  title About Dex
 block content
   .home
-    h1
     em video goes here
     .clear
     section.content.homebox
-      h1
-      b
-        em What is Dex?
+      h2 What is Dex?
       p(style='white-space:pre;')
-      p Dex allows you to <a href="/new">create a custom web scraper</a> to extract the information you need from websites.
-      p(style='white-space:pre;')
-      p You can also <a href="/browse/1">browse our library</a> of open source scrapers to find one that already matches your criteria.
+      p Dex lets you <a href="/new">create a custom JSON API</a> for any website. Easily extract the data you need from anywhere on the web.
 
     section.content.homebox
-      b
-        em Why use Dex?
+      h2 Why use Dex?
       p(style='white-space:pre;')
-      p Ever wished your favorite website had an API?  Need a quick way to scrape lots of pages easily?
-      p(style='white-space:pre;')
-      p Dex is ideal for data miners, mashup developers, or anyone who wants to monitor or detect changes in data.
-    .clear
+      p Ever wished your favorite website had an API? HTML is a pain to parse, but Dex makes it super easy to extract the data you want from webpages.
+
+    .call-to-action
+      a(href='/new') Try it now &raquo;

@@ -14,9 +14,9 @@ app.get '/', (req, res) ->
   res.render 'index', {title: 'About Dex'}
 
 app.get '/new', (req, res) ->
-  res.render 'new', {title: 'Create a Scraper'}
+  res.render 'new', {title: 'Create a Custom API'}
 
-app.get '/scrape.json', (req, res) =>
+app.get '/api.json', (req, res) =>
   url = _.str.trim(req.query.url)
 
   # Input validation

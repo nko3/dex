@@ -8,7 +8,7 @@ scrapePath = =>
     url: urlValue()
     s: selectors()
 
-  "/scrape.json?#{decodeURIComponent($.param(params)).replace(/#/g, '%23')}"
+  "/api.json?#{decodeURIComponent($.param(params)).replace(/#/g, '%23')}"
 
 urlValue = =>
   value = $.trim($("input[name='url']").val())
