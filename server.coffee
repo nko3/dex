@@ -55,7 +55,9 @@ app.get '/:id/scrape', (req, res) =>
     if e
       res.send(400, "scraper does not exist")
     else
-      renderScrape(res, req.query.url, scraper.selectors)
+      selectorValues = _.map scraper.selectors, (selector) ->
+        selector.value
+      renderScrape(res, req.query.url, selectorValues)
 
 app.get '/:id', (req, res) =>
   models.Scraper.findById req.params.id, (e, scraper) ->
