@@ -1,10 +1,10 @@
 @darkblue: #016ABC;
 @lightblue: #F7F8Fb;
-@black: #333;
+@black: #444;
 @grey: #aaa;
 @width: 940px;
 @font: 'Actor',tahoma,verdana,sans-serif;
-@form-part-padding-h:28px;
+@form-part-padding-h:24px;
 
 html,body {
   width: 100%;
@@ -129,30 +129,73 @@ section.form-part {
   margin-bottom: 20px;
 }
 
+.url-example {
+  input {
+    margin-bottom: 8px;
+  }
+}
+
 .selectors-wrap, .preview-wrap {
   h2 {
     font-size: 16px;
     line-height:20px;
-    padding: 12px 8px 0;
+    padding: 16px 8px 0;
   }
   h3 {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 18px;
     color: lighten(@black, 10%);
     padding: 0 8px 8px;
     position: relative;
+    font-weight: normal;
+  }
+}
+
+div.tagsinput span.tag {
+  background: #eEF;
+  color: #479;
+  border: 1px solid #ccd;
+  padding: 3px 4px;
+  a {
+    color: #479;
   }
 }
 
 .selectors-wrap {
   float: left;
   width: @width / 2 - @form-part-padding-h/2;
+  .selector {
+    border-bottom: 2px solid darken(@lightblue, 8%);
+    padding-bottom: 20px;
+    font-size: 14px;
+    p {
+      padding: 8px 4px 0;
+    }
+  }
   input {
     display: inline;
+    margin-bottom: 0;
+  }
+  input[type='text'] {
+    width: 320px;
   }
   .remove-selector {
     padding-left: 8px;
-    font-size: 14px;
+  }
+  .additional-selectors {
+    li {
+      margin-top: 20px;
+    }
+  }
+  .controls {
+    position: relative;
+    padding-top: 20px;
+    .preview-all {
+      margin-bottom:0;
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+    }
   }
 }
 
@@ -173,6 +216,9 @@ section.form-part {
   font-size: 12px;
   overflow:scroll;
   word-wrap:  break-word;
+  pre {
+    white-space: pre-wrap;
+  }
 }
 
 section.form-submit {

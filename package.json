@@ -18,7 +18,6 @@
     "less-middleware": "0.1.x",
     "connect-coffee-script": "0.0.4",
     "connect": "2.6.x",
-    "mongoose": "3.x",
     "request": "2.x",
     "jsdom": "0.2.x",
     "underscore": "1.4.x",
