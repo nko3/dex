@@ -3,6 +3,13 @@ tagsInputOptions =
   height: '45px'
   width: '320px'
 
+scrapePath = =>
+  params =
+    url: urlValue()
+    s: selectors()
+
+  "/scrape?#{decodeURIComponent($.param(params))}"
+
 urlValue = =>
   value = $.trim($("input[name='url']").val())
   if value == "" then null else value
@@ -34,19 +41,22 @@ previewAll = (e) =>
   return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
   return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
 
-  #decodeURIComponent($.param({url: "http://www.google.com", s: [{v: 'head title'}, {v: 'html meta', t: 'f', a: ['content', 'name']}]}))
-  params =
-    url: urlValue()
-    s: selectors()
-
   $.ajax
     type: 'GET'
-    url: "/scrape?#{decodeURIComponent($.param(params))}"
+    url: scrapePath()
     dataType: 'json'
     success: (data) =>
       updatePreview(false, data)
     error: (jqXHR, textStatus, error) =>
       updatePreview(true, [jqXHR, textStatus, error])
+
+done = (e) =>
+  e.preventDefault()
+
+  return alert("Please enter at least one CSS selector.")  unless selectors().length > 0
+  return alert("Please enter an example URL to test the selectors on.")  unless urlValue()?
+
+  window.location.href = scrapePath()
 
 removeSelector = (e) =>
   e.preventDefault()
@@ -80,4 +90,5 @@ $ =>
   $('.preview-all').click(previewAll)
   $('.preview-wrap-text input').change(togglePreviewWrapText)
   $("input[name='attributes']").tagsInput(tagsInputOptions)
+  $('.done').click(done)
 
