@@ -90,10 +90,24 @@ updatePreview = (error, data) =>
   $('.preview pre').text(json)
   hljs.highlightBlock($(".preview pre")[0])
 
+prefill = =>
+  $("input[name='url']").val("http://www.google.com/")
+  $("input[name='selectors[]']:first").val("meta")
+  $("input[name='innerText']:first").prop("checked", "")
+  $("input[name='attributes']:first").importTags('name,content')
+  $("input[name='custom-key']:first").val("google_meta_tags")
+  $(".add-selector").trigger('click')
+  $("input[name='selectors[]']:last").val("a")
+  $("input[name='attributes']:last").importTags('href')
+  $("input[name='custom-key']:last").val("google_nav_links")
+  $(".preview-all").trigger("click")
+
 $ =>
   $('.add-selector').click(addSelector)
   $('.preview-all').click(previewAll)
   $('.preview-wrap-text input').change(togglePreviewWrapText)
   $("input[name='attributes']").tagsInput(tagsInputOptions)
   $('.done').click(done)
+  if window.location.hash == "#example"
+    prefill()
 
