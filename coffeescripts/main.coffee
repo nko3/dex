@@ -97,7 +97,7 @@ prefill = =>
   $("input[name='attributes']:first").importTags('name,content')
   $("input[name='custom-key']:first").val("google_meta_tags")
   $(".add-selector").trigger('click')
-  $("input[name='selectors[]']:last").val("a")
+  $("input[name='selectors[]']:last").val("#gb a")
   $("input[name='attributes']:last").importTags('href')
   $("input[name='custom-key']:last").val("google_nav_links")
   $(".preview-all").trigger("click")
