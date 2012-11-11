@@ -30,7 +30,9 @@ app.post '/create', (req, res) ->
   else if url.length == 0 || url.length > 1000
     res.json(400, {message: "Scraper URL example length must be between 1 and 1000 characters."})
   else
-    scraper = new models.Scraper({title: req.body.title, url_example: req.body.url_example, selectors: req.body.selectors})
+    scraper = new models.Scraper({title: req.body.title, url_example: req.body.url_example})
+    for selector in req.body.selectors
+      scraper.selectors.push({value: selector})
     scraper.save()
     res.json({path: "/#{scraper.id}"})
 
