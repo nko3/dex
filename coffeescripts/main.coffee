@@ -27,6 +27,7 @@ makePreviewPost = (selectors) =>
   $.ajax
     type: 'POST'
     url: '/preview'
+    dataType: 'json'
     data:
       url: urlValue()
       selectors: selectors
@@ -54,9 +55,10 @@ togglePreviewWrapText = (e) =>
 
 updatePreview = (error, data) =>
   if error
-    console.log "TODO HANDLE ERROR", data
+    json = data[0].responseText
   else
-    $('.preview pre').text(JSON.stringify(data))
+    json = JSON.stringify(data, null, '  ')
+  $('.preview pre').text(json)
 
 $ =>
   $('.add-selector').click(addSelector)

@@ -1,8 +1,16 @@
 express = require 'express'
 config = require './config'
 models = require './models'
+j = require './jenkins'
 app = express()
 config.expressApp(app)
+
+renderScrape = (res, url, selectors) =>
+  jenkins = new j.Jenkins()
+  jenkins.extract url, selectors,
+    (json) =>
+      status = if json['error'] then 400 else 200
+      res.json(status, json)
 
 app.get '/', (req, res) ->
   res.render 'index', {title: 'Home'}
@@ -31,15 +39,14 @@ app.get '/browse/:page', (req, res) ->
       res.render 'browse', {title: 'Browse Scrapers', scrapers: scrapers, nextPage: nextPage, prevPage: prevPage, page: page, totalPages: totalPages}
 
 app.post '/preview', (req, res) ->
-  # TODO use req.body.selectors
-  res.json({url: req.body.url})
+  renderScrape(res, req.body.url, req.body.selectors)
 
 app.get '/:id/scrape', (req, res) =>
   models.Scraper.findById req.params.id, (e, scraper) ->
     if e
       res.send(400, "scraper does not exist")
     else
-      res.json({url: req.query.url, somemorejson: 'TODO'})
+      renderScrape(res, req.query.url, scraper.selectors)
 
 app.get '/:id', (req, res) =>
   models.Scraper.findById req.params.id, (e, scraper) ->
